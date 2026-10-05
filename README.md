@@ -2,6 +2,8 @@
 
 A full-stack web platform for publishing, streaming, and reviewing podcast episodes. Built with a Node.js/Express REST API backend, MongoDB for data storage, and a React 19 frontend with an integrated audio player.
 
+🚀 **Live Deployment**: [https://podcast-platform-1.onrender.com](https://podcast-platform-1.onrender.com/)
+
 ---
 
 ## Tech Stack
@@ -142,6 +144,7 @@ npm run dev
 
 Deploy both frontend and backend together as a single Render Web Service:
 
+- **Live URL**: [https://podcast-platform-1.onrender.com](https://podcast-platform-1.onrender.com/)
 - **Root Directory**: `podcast`
 - **Environment**: `Node`
 - **Build Command**: `npm install && npm run build`
