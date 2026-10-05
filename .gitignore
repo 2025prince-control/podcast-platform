@@ -1,0 +1,22 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+
+# Environment variables
+.env
+.env.local
+.env.*.local
+
+# Build output
+dist/
+frontend/dist/
+
+# Uploads directory (keep directory tracked)
+uploads/*
+!uploads/.gitkeep
+
+# System & IDE files
+.DS_Store
+.vscode/
+.idea/
+*.log
