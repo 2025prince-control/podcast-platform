@@ -70,28 +70,35 @@ A full-stack web platform for publishing, streaming, and reviewing podcast episo
 
 ```text
 podcast-platform/
-├── config/             # Database connection (Mongoose)
-├── controllers/        # Route controllers (Auth, Episode, Review, Sub, Analytics)
-├── middleware/         # Auth & Multer upload middlewares
-├── models/             # Mongoose schemas (User, Episode, Subscription, Review)
-├── routes/             # API routes
-├── uploads/            # Uploaded audio tracks
-├── server.js           # Express server entrypoint
-└── frontend/           # React 19 + Vite client app
-    ├── src/
-    │   ├── components/ # Modals, cards, navigation & audio player
-    │   ├── context/    # Auth context & state
-    │   ├── services/   # API fetch client
-    │   ├── App.jsx     # Main layout & tabs
-    │   └── index.css   # Clean design system styles
-    └── vite.config.js  # Vite config & API proxy
+├── README.md
+├── .gitignore
+└── podcast/
+    ├── backend/
+    │   ├── config/             # Database connection (Mongoose)
+    │   ├── controllers/        # Route controllers (Auth, Episode, Review, Sub, Analytics)
+    │   ├── middleware/         # Auth & Multer upload middlewares
+    │   ├── models/             # Mongoose schemas (User, Episode, Subscription, Review)
+    │   ├── routes/             # API routes
+    │   ├── uploads/            # Uploaded audio tracks
+    │   ├── server.js           # Express server entrypoint
+    │   ├── package.json        # Backend dependencies
+    │   └── .env.example        # Environment variable template
+    └── frontend/               # React 19 + Vite client app
+        ├── src/
+        │   ├── components/     # Modals, cards, navigation & audio player
+        │   ├── context/        # Auth context & state
+        │   ├── services/       # API fetch client
+        │   ├── App.jsx         # Main layout & tabs
+        │   └── index.css       # Clean design system styles
+        ├── package.json        # Frontend dependencies
+        └── vite.config.js      # Vite config & API proxy
 ```
 
 ---
 
 ## Environment Variables
 
-Create a `.env` file in the root folder:
+Create a `.env` file in the `podcast/backend/` directory:
 
 ```env
 PORT=5001
@@ -106,6 +113,9 @@ JWT_SECRET=your_jwt_secret_key
 ### 1. Backend
 
 ```bash
+# Navigate to backend
+cd podcast/backend
+
 # Install dependencies
 npm install
 
@@ -117,7 +127,7 @@ node server.js
 
 ```bash
 # Navigate to frontend
-cd frontend
+cd podcast/frontend
 
 # Install dependencies
 npm install
