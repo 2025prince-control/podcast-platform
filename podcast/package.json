@@ -5,7 +5,7 @@
   "description": "Unified root package for Render single-service deployment",
   "scripts": {
     "install:backend": "npm --prefix backend install",
-    "install:frontend": "npm --prefix frontend install",
+    "install:frontend": "npm --prefix frontend install --include=dev",
     "postinstall": "npm run install:backend && npm run install:frontend",
     "build": "npm run install:backend && npm run install:frontend && npm --prefix frontend run build",
     "start": "node backend/server.js"
