@@ -1,5 +1,3 @@
-const BACKEND_URL = 'http://localhost:5001';
-
 export const getToken = () => localStorage.getItem('token');
 export const setToken = (token) => localStorage.setItem('token', token);
 export const removeToken = () => localStorage.removeItem('token');
@@ -20,7 +18,7 @@ export const getAudioUrl = (audioPath) => {
   if (audioPath.startsWith('http://') || audioPath.startsWith('https://')) {
     return audioPath;
   }
-  return `${BACKEND_URL}${audioPath.startsWith('/') ? '' : '/'}${audioPath}`;
+  return audioPath.startsWith('/') ? audioPath : `/${audioPath}`;
 };
 
 async function request(endpoint, options = {}) {
@@ -37,7 +35,7 @@ async function request(endpoint, options = {}) {
     headers['Authorization'] = `Bearer ${token}`;
   }
 
-  const url = `${BACKEND_URL}${endpoint.startsWith('/') ? '' : '/'}${endpoint}`;
+  const url = endpoint.startsWith('/') ? endpoint : `/${endpoint}`;
 
   try {
     const response = await fetch(url, {

@@ -135,3 +135,19 @@ npm install
 # Start Vite dev server (runs on port 3000)
 npm run dev
 ```
+
+---
+
+## Deployment (Single Web Service on Render)
+
+Deploy both frontend and backend together as a single Render Web Service:
+
+- **Root Directory**: `podcast`
+- **Environment**: `Node`
+- **Build Command**: `npm install && npm run build`
+- **Start Command**: `npm start`
+
+### Required Environment Variables on Render:
+- `MONGO_URI`: MongoDB connection string
+- `JWT_SECRET`: Secret key for JWT signing
+- `PORT`: (Provided automatically by Render or default 5001)

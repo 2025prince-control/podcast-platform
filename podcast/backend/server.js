@@ -12,6 +12,7 @@ const reviewRoutes = require("./routes/reviewRoutes");
 const analyticsRoutes = require("./routes/analyticsRoutes");
 
 dotenv.config();
+dotenv.config({ path: path.join(__dirname, ".env") });
 
 const app = express();
 
@@ -28,9 +29,17 @@ app.use("/api/subscriptions", subscriptionRoutes);
 app.use("/api/reviews", reviewRoutes);
 app.use("/api/analytics", analyticsRoutes);
 
-app.get("/", (req, res) => {
-  res.json({
-    message: "Podcast Platform API is running"
+const frontendDistPath = path.join(__dirname, "../frontend/dist");
+
+app.use(express.static(frontendDistPath));
+
+app.use((req, res) => {
+  res.sendFile(path.join(frontendDistPath, "index.html"), (err) => {
+    if (err) {
+      res.status(200).json({
+        message: "Podcast Platform API is running"
+      });
+    }
   });
 });
 
