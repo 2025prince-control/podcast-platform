@@ -1,3 +1,4 @@
+const mongoose = require("mongoose");
 const Subscription = require("../models/Subscription");
 const Episode = require("../models/Episode");
 
@@ -25,8 +26,9 @@ const subscribe = async (req, res) => {
     });
 
     if (existingSubscription) {
-      return res.status(400).json({
-        message: "Already subscribed to this episode"
+      return res.status(200).json({
+        message: "Already subscribed to this episode",
+        subscription: existingSubscription
       });
     }
 
@@ -49,11 +51,22 @@ const subscribe = async (req, res) => {
 
 const unsubscribe = async (req, res) => {
   try {
-    const subscription = await Subscription.findById(req.params.id);
+    let subscription = null;
+    const targetId = req.params.id;
+
+    if (mongoose.Types.ObjectId.isValid(targetId)) {
+      subscription = await Subscription.findById(targetId);
+      if (!subscription) {
+        subscription = await Subscription.findOne({
+          episode: targetId,
+          listener: req.user.userId
+        });
+      }
+    }
 
     if (!subscription) {
-      return res.status(404).json({
-        message: "Subscription not found"
+      return res.status(200).json({
+        message: "Unsubscribed successfully"
       });
     }
 
@@ -63,7 +76,7 @@ const unsubscribe = async (req, res) => {
       });
     }
 
-    await Subscription.findByIdAndDelete(req.params.id);
+    await Subscription.findByIdAndDelete(subscription._id);
 
     res.status(200).json({
       message: "Unsubscribed successfully"
@@ -76,7 +89,20 @@ const unsubscribe = async (req, res) => {
   }
 };
 
+const getMySubscriptions = async (req, res) => {
+  try {
+    const subscriptions = await Subscription.find({ listener: req.user.userId });
+    res.status(200).json({ subscriptions });
+  } catch (error) {
+    res.status(500).json({
+      message: "Failed to get subscriptions",
+      error: error.message
+    });
+  }
+};
+
 module.exports = {
   subscribe,
-  unsubscribe
+  unsubscribe,
+  getMySubscriptions
 };

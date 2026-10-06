@@ -1,0 +1,13 @@
+{
+  "name": "podcast-platform",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Podcast Platform workspace root",
+  "scripts": {
+    "start": "node podcast/backend/server.js",
+    "build": "npm --prefix podcast run build",
+    "install:all": "npm --prefix podcast run postinstall",
+    "backend": "node podcast/backend/server.js",
+    "frontend": "npm --prefix podcast/frontend run dev"
+  }
+}

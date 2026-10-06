@@ -113,6 +113,8 @@ export const episodesAPI = {
 };
 
 export const subscriptionsAPI = {
+  getMy: () => request('/api/subscriptions/my'),
+
   subscribe: (episodeId) =>
     request('/api/subscriptions', {
       method: 'POST',

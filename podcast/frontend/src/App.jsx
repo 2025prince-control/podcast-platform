@@ -82,6 +82,23 @@ export default function App() {
     fetchEpisodes(searchQuery);
   }, [searchQuery]);
 
+  useEffect(() => {
+    if (isAuthenticated) {
+      subscriptionsAPI.getMy()
+        .then((res) => {
+          if (res?.subscriptions) {
+            const map = {};
+            res.subscriptions.forEach((sub) => {
+              const epId = typeof sub.episode === 'object' ? sub.episode?._id : sub.episode;
+              if (epId) map[epId] = sub._id;
+            });
+            updateSubscriptionsMap(map);
+          }
+        })
+        .catch(() => {});
+    }
+  }, [isAuthenticated]);
+
   const updateSubscriptionsMap = (newMap) => {
     setSubscriptionsMap(newMap);
     localStorage.setItem('podcast_user_subs', JSON.stringify(newMap));

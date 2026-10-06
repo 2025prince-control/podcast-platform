@@ -5,9 +5,11 @@ const protect = require("../middleware/authMiddleware");
 
 const {
   subscribe,
-  unsubscribe
+  unsubscribe,
+  getMySubscriptions
 } = require("../controllers/subscriptionController");
 
+router.get("/my", protect, getMySubscriptions);
 
 router.post("/", protect, subscribe);
 
